@@ -41,18 +41,17 @@ function golfit () {
 		done
 		echo "\n*****************************"
 	}
-	num_push_ball () {
-		echo $(($1 - 1))
-	}
 	fin_status () {
 		echo not reached.....
 	}
 	rtn=`calc_ground_len_after_ball $X_BALL $X_HOLE $X_LENGTH_STAGE` 
 	rtn2=`calc_ground_len_after_hole $X_BALL $X_HOLE $X_LENGTH_STAGE` 
-	BEFOREBALL=$X_BALL 
-	echo "AFTER_BALL=${rtn}"
-	echo "AFTER_HOLE=${rtn2}"
-	echo "calc_test $BEFORE_BALL $AFTER_BALL $AFTER_HOLE$X_BALL"
+	BEFORE_BALL=$X_BALL 
+	AFTER_BALL=${rtn} 
+	AFTER_HOLE=${rtn2} 
+	echo "calc_test_before_ball $BEFORE_BALL"
+	echo "calc_test_after_ball $AFTER_BALL"
+	echo "calc_test_after_hole $AFTER_HOLE"
 	show_status $BEFORE_BALL $AFTER_BALL $AFTER_HOLE
 	input="" 
 	array=(0 1 2 3 4) 
@@ -70,7 +69,6 @@ function golfit () {
 		cursor_point=0 
 		while [ $input = "s" ]
 		do
-			cursor_point=$(( $cursor_point % $array_len )) 
 			counter=0 
 			sleep 0.3
 			for item in $array
@@ -83,12 +81,22 @@ function golfit () {
 				fi
 				counter=$(( $counter + 1 )) 
 			done
-			trap "echo \n; echo Push $cursor_point !!! ; break" 2
+			echo -n " test cursor_point >> $cursor_point"
 			printf '\r'
 			cursor_point=$(( $cursor_point + 1 )) 
+			cursor_point=$(( $cursor_point % $array_len )) 
+			trap "echo \n; break" 2
 		done
 		sleep 1
-		num_push='num_push_ball $cursor_point' 
+		echo "test_cursor_point $cursor_point"
+		push_x=$(( ($cursor_point + 4) % $array_len )) 
+		echo "Push $push_x !!!"
+		X_PUSHED_BALL=$(( $X_BALL + $push_x )) 
+		rtn=`calc_ground_len_after_ball $X_PUSHED_BALL $X_HOLE $X_LENGTH_STAGE` 
+		rtn2=`calc_ground_len_after_hole $X_PUSHED_BALL $X_HOLE $X_LENGTH_STAGE` 
+		BEFORE_BALL=$X_PUSHED_BALL 
+		AFTER_BALL=${rtn} 
+		AFTER_HOLE=${rtn2} 
 		sleep 1
 		echo "*****************"
 		echo "**** results ****"
