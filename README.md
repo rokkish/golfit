@@ -24,23 +24,4 @@ input s and start the roulette >>>
 
 ```
 ### output
-```
->>> golfit                 
-*****************************
-__o______ ________
-         U        
-*****************************
-input s and start the roulette >>> s
-press Ctrl+C and stop the roulette
-0 1 2 3 4  
-- - = - -
-*****************
-**** results ****
-*****************
-*****************************
-_____o___ ________
-         U        
-*****************************
-not reached.....
-fin
-```
+[Gif](./sample.gif)
