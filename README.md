@@ -24,4 +24,4 @@ input s and start the roulette >>>
 
 ```
 ### output
-[Gif](https://user-images.githubusercontent.com/42852440/149652366-d7b752fc-c152-49ff-b0c1-a62791aca4bc.gif)
+![Gif](https://user-images.githubusercontent.com/42852440/149652366-d7b752fc-c152-49ff-b0c1-a62791aca4bc.gif)
